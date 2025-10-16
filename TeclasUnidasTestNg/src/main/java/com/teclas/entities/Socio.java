@@ -1,4 +1,4 @@
-package tdv.teclasunidos.entities;
+package com.teclas.entities;
 
 import java.util.Objects;
 

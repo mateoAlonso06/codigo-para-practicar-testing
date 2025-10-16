@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SocioTest {
 
     @Test
-    public void crearSocio_datosValidos_creaSocio() throws EdadInvalidaException, NombreMuyLargoException {
+    public void crearSocio_datosValidos_creaSocio() throws EdadInvalidaException, NombreMuyLargoException, DniInvalidoException {
         String nombre = "Mateo";
         int edad = 23;
         String direccion = "Arroyo Seco 2500";
@@ -40,5 +40,30 @@ public class SocioTest {
         String dni = "43.855.104";
 
         assertThrows(EdadInvalidaException.class, () -> new Socio(nombre, edad, direccion, dni));
+    }
+
+    @Test
+    public void crearSocio_datosInvalidos_DniValido() throws EdadInvalidaException, NombreMuyLargoException, DniInvalidoException {
+        String nombre = "Mateo";
+        int edad = 22;
+        String direccion = "Arroyo Seco 2500";
+        String dni = "1234567";
+
+        Socio socio = new Socio(nombre, edad, direccion, dni);
+        assertEquals(nombre, socio.getNombre());
+        assertEquals(edad, socio.getEdad());
+        assertEquals(direccion, socio.getDireccion());
+        assertEquals(dni, socio.getDni());
+        assertNotNull(socio);
+    }
+
+    @Test
+    public void crearSocio_datosInvalidos_DniInvalido() {
+        String nombre = "Mateo";
+        int edad = 22;
+        String direccion = "Arroyo Seco 2500";
+        String dni = "54.232.232";
+
+        assertThrows(DniInvalidoException.class, () -> new Socio(nombre, edad, direccion, dni));
     }
 }

@@ -16,7 +16,7 @@ public class RecursoTest {
     }
 
     @Test
-    public void crearRecurso_datosValidos_retornaNull() {
+    public void crearRecurso_datosInvalidos_retornaNull() {
         String nombre = "Oficina";
         String ubicacion = "Piso 2";
 
