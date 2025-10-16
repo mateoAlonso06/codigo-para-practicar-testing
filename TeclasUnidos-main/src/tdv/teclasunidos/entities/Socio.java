@@ -18,21 +18,36 @@ public class Socio {
         this.dni = dni;
     }
 
-	public int getEdad() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getDni() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getNombre() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public int getEdad() {
+        return edad;
+    }
 
-    // Getters y setters
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 }
 

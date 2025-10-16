@@ -1,5 +1,6 @@
 
 package tdv.teclasunidos;
+
 import java.util.Scanner;
 
 import tdv.teclasunidos.entities.Actividad;
@@ -28,10 +29,10 @@ public class Main {
             System.out.println("4. Listar Socios");
             System.out.println("5. Listar Actividades");
             System.out.println("7. Alta de Recurso");
-System.out.println("8. Alta de Recurso");
-System.out.println("9. Reservar Recurso");
-System.out.println("10. Cancelar Reserva");
-System.out.println("11. Salir");
+            System.out.println("8. Alta de Recurso");
+            System.out.println("9. Reservar Recurso");
+            System.out.println("10. Cancelar Reserva");
+            System.out.println("11. Salir");
             System.out.println("6. Salir");
             System.out.print("Opción: ");
             String opcion = scanner.nextLine();
@@ -52,12 +53,12 @@ System.out.println("11. Salir");
                 case "5":
                     listarActividades();
                     break;
-               case "6":
-    eliminarSocio(scanner);
-    break;
-case "7":
-    eliminarActividad(scanner);
-    break;
+                case "6":
+                    eliminarSocio(scanner);
+                    break;
+                case "7":
+                    eliminarActividad(scanner);
+                    break;
                 default:
                     System.out.println("Opción inválida.");
             }
@@ -67,16 +68,16 @@ case "7":
     }
 
     private static void eliminarActividad(Scanner scanner) {
-		// TODO Auto-generated method stub
-		
-	}
+        // TODO Auto-generated method stub
 
-	private static void eliminarSocio(Scanner scanner) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	private static void altaSocio(Scanner scanner) {
+    private static void eliminarSocio(Scanner scanner) {
+        // TODO Auto-generated method stub
+
+    }
+
+    private static void altaSocio(Scanner scanner) {
         System.out.print("Nombre: ");
         String nombre = scanner.nextLine();
         System.out.print("Edad: ");
@@ -86,11 +87,12 @@ case "7":
         System.out.print("DNI: ");
         String dni = scanner.nextLine();
 
-       try { Socio socio = new Socio(nombre, edad, direccion, dni);
-       		socioRepo.agregar(socio);
-       	} catch (Exception e) {
-		// TODO: handle exception
-       	}
+        try {
+            Socio socio = new Socio(nombre, edad, direccion, dni);
+            socioRepo.agregar(socio);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
         System.out.println("Socio agregado.");
     }
 
@@ -113,62 +115,62 @@ case "7":
         System.out.println("Actividad agregada.");
     }
 
-private static final ReservaService reservaService = new ReservaService();
+    private static final ReservaService reservaService = new ReservaService();
 
-private static void altaRecurso(Scanner scanner) {
-    System.out.print("Nombre del recurso: ");
-    String nombre = scanner.nextLine();
-    System.out.print("Ubicación: ");
-    String ubicacion = scanner.nextLine();
+    private static void altaRecurso(Scanner scanner) {
+        System.out.print("Nombre del recurso: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ubicación: ");
+        String ubicacion = scanner.nextLine();
 
-    Recurso recurso = new Recurso(nombre, ubicacion);
-    recursoRepo.agregar(recurso);
-    System.out.println("Recurso agregado.");
-}
-
-private static void reservarRecurso(Scanner scanner) {
-    System.out.print("DNI del socio: ");
-    String dni = scanner.nextLine();
-    System.out.print("Nombre del recurso: ");
-    String nombreRecurso = scanner.nextLine();
-    System.out.print("Inicio (YYYY-MM-DDTHH:MM): ");
-    LocalDateTime inicio = LocalDateTime.parse(scanner.nextLine());
-    System.out.print("Fin (YYYY-MM-DDTHH:MM): ");
-    LocalDateTime fin = LocalDateTime.parse(scanner.nextLine());
-
-    Socio socio = socioRepo.buscarPorDni(dni);
-    Recurso recurso = recursoRepo.buscarPorNombre(nombreRecurso);
-
-    if (socio == null || recurso == null) {
-        System.out.println("Socio o recurso no encontrado.");
-        return;
+        Recurso recurso = Recurso.crearRecurso(nombre, ubicacion);
+        recursoRepo.agregar(recurso);
+        System.out.println("Recurso agregado.");
     }
 
-    boolean exito = reservaService.reservar(recurso, socio, inicio, fin);
-    System.out.println(exito ? "Reserva realizada." : "Conflicto con otra reserva.");
-}
+    private static void reservarRecurso(Scanner scanner) {
+        System.out.print("DNI del socio: ");
+        String dni = scanner.nextLine();
+        System.out.print("Nombre del recurso: ");
+        String nombreRecurso = scanner.nextLine();
+        System.out.print("Inicio (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime inicio = LocalDateTime.parse(scanner.nextLine());
+        System.out.print("Fin (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime fin = LocalDateTime.parse(scanner.nextLine());
 
-private static void cancelarReserva(Scanner scanner) {
-    System.out.print("DNI del socio: ");
-    String dni = scanner.nextLine();
-    System.out.print("Nombre del recurso: ");
-    String nombreRecurso = scanner.nextLine();
-    System.out.print("Inicio (YYYY-MM-DDTHH:MM): ");
-    LocalDateTime inicio = LocalDateTime.parse(scanner.nextLine());
-    System.out.print("Fin (YYYY-MM-DDTHH:MM): ");
-    LocalDateTime fin = LocalDateTime.parse(scanner.nextLine());
+        Socio socio = socioRepo.buscarPorDni(dni);
+        Recurso recurso = recursoRepo.buscarPorNombre(nombreRecurso);
 
-    Socio socio = socioRepo.buscarPorDni(dni);
-    Recurso recurso = recursoRepo.buscarPorNombre(nombreRecurso);
+        if (socio == null || recurso == null) {
+            System.out.println("Socio o recurso no encontrado.");
+            return;
+        }
 
-    if (socio == null || recurso == null) {
-        System.out.println("Socio o recurso no encontrado.");
-        return;
+        boolean exito = reservaService.reservar(recurso, socio, inicio, fin);
+        System.out.println(exito ? "Reserva realizada." : "Conflicto con otra reserva.");
     }
 
-    boolean exito = reservaService.cancelarReserva(recurso, socio, inicio, fin);
-    System.out.println(exito ? "Reserva cancelada." : "Reserva no encontrada.");
-}
+    private static void cancelarReserva(Scanner scanner) {
+        System.out.print("DNI del socio: ");
+        String dni = scanner.nextLine();
+        System.out.print("Nombre del recurso: ");
+        String nombreRecurso = scanner.nextLine();
+        System.out.print("Inicio (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime inicio = LocalDateTime.parse(scanner.nextLine());
+        System.out.print("Fin (YYYY-MM-DDTHH:MM): ");
+        LocalDateTime fin = LocalDateTime.parse(scanner.nextLine());
+
+        Socio socio = socioRepo.buscarPorDni(dni);
+        Recurso recurso = recursoRepo.buscarPorNombre(nombreRecurso);
+
+        if (socio == null || recurso == null) {
+            System.out.println("Socio o recurso no encontrado.");
+            return;
+        }
+
+        boolean exito = reservaService.cancelarReserva(recurso, socio, inicio, fin);
+        System.out.println(exito ? "Reserva cancelada." : "Reserva no encontrada.");
+    }
 
     private static void inscribirSocio(Scanner scanner) {
         System.out.print("DNI del socio: ");
@@ -200,7 +202,7 @@ private static void cancelarReserva(Scanner scanner) {
         System.out.println("---- Actividades ----");
         for (Actividad a : actividadRepo.listar()) {
             System.out.println(a.getNombre() + " - " + a.getEncargado() + ", Cupo: " +
-                               a.getCupo() + ", Edad mínima: " + a.getEdadMinima());
+                    a.getCupo() + ", Edad mínima: " + a.getEdadMinima());
         }
     }
 }

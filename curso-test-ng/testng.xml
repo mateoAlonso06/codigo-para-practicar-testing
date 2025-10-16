@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="GroupSuite">
+<!--<suite name="GroupSuite" parallel="methods" thread-count="2">-->
+    <test name="SmokeTest">
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="init"/>-->
+<!--                <include name="setup"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+        <parameter name="param1" value="Hola soy el param 1" />
+        <parameter name="param2" value="Hola soy el param 2" />
+        <classes>
+            <class name="com.integrador.DataProviderTest"/>
+        </classes>
+    </test>
+</suite>

@@ -12,7 +12,7 @@ public class ReservaService {
 
 
     public boolean reservar(Recurso recurso, Socio socio, LocalDateTime inicio, LocalDateTime fin) {
-        List<Reserva> reservas = reservasPorRecurso.computeIfAbsent((String) recurso.getNombre(), k -> new ArrayList<>());
+        List<Reserva> reservas = reservasPorRecurso.computeIfAbsent(recurso.getNombre(), k -> new ArrayList<>());
 
         for (Reserva r : reservas) {
             if (r.seSuperpone(inicio, fin)) {
@@ -37,4 +37,3 @@ public class ReservaService {
         return reservasPorRecurso.getOrDefault(nombreRecurso, new ArrayList<>());
     }
 }
-
